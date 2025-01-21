@@ -1,9 +1,22 @@
 import React from 'react'
+import {Routes, Route} from 'react-router-dom'
+import './App.css'
+import Navbar from './components/Navbar.jsx'
+import Home from './pages/Home.jsx'
+import PlayerForm from './forms/PlayerForm.jsx'
+import StatForm from './forms/StatForm.jsx'
+import TeamForm from './forms/TeamForm.jsx'
 
 function App() {
   return (
     <div>
-      
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/playerForm' element={<PlayerForm />} />
+        <Route path='/statForm' element={<StatForm />} />
+        <Route path='teamForm' element={<TeamForm />} />
+      </Routes>
     </div>
   )
 }
