@@ -17,9 +17,10 @@ const [showForm, setShowForm] = useState(false)
   <nav className='navbar_container'>
    <ul>
     <li><NavLink to='/'>HOME</NavLink></li>
+    <li><NavLink to='/playerslists'>PLAYERS</NavLink></li>
     <li><NavLink to='#' onClick={handleForm}>FORMS</NavLink>
     {showForm && (
-     <ul>
+     <ul className={showForm ? 'dropdown-visible' : 'dropdown-hidden'}>
     <li><NavLink to='/playerForm' onClick={closeDropdown}>PLAYER FORM</NavLink></li>
     <li><NavLink to='/statForm' onClick={closeDropdown}>STAT FORM</NavLink></li>
     <li><NavLink to='/teamForm' onClick={closeDropdown}>TEAM FORM</NavLink></li>

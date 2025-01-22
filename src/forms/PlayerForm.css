@@ -1,0 +1,15 @@
+.player_form_container {
+ display: flex;
+ height: calc(100vh - 60px);
+ width: 100%;
+ justify-content: center;
+ align-items: center;
+ background-color: rgb(80, 79, 79);
+ color: white
+}
+
+.player_form {
+ display: flex;
+ flex-direction: column;
+}
+

@@ -14,8 +14,49 @@
  list-style: none;
 }
 
+.navbar_container ul ul {
+ position: absolute;
+ right: -8px;
+ top: 175%;
+ display: flex;
+ flex-direction: column;
+ width: 240px;
+ height: 200px
+}
+
+.navbar_container ul li {
+ position: relative;
+}
+
 .navbar_container ul a {
  text-decoration: none;
  font-size: 20px;
  color: black;
+ width: 148px;
+ display: inline-block
+}
+
+.navbar_container ul a:hover {
+ font-weight: bold;
+}
+.dropdown-hidden {
+ display: none;
+}
+
+.dropdown-visible {
+ display: block;
+ position: absolute;
+ background: orange;
+ border-left: 1px solid black;
+ border-right: 1px solid black;
+ border-bottom: 1px solid black;
+ width: 150px;
+ height: auto;
+ max-height: 200px;
+ padding: 10px 0;
+}
+
+.dropdown-visible li {
+ padding: 10px;
+ text-align: center;
 }
