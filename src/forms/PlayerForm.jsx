@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
-import './PlayerForm.css'
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import './PlayerForm.css';
 
 function PlayerForm() {
 const [playerFormData, setPlayerFormData] = useState({firstName: "", lastName: "", age: "", position: "", number: ""})
 const [playerLists, setPlayerLists] = useState([])
+const [message, setMessage] = useState('')
 
 const handlePlayerChange = (e) => {
   const {name, value} = e.target;
@@ -12,6 +14,10 @@ const handlePlayerChange = (e) => {
   setPlayerFormData(prev => ({...prev, [name]: value}))
 }
 console.log(playerLists)
+
+
+
+
   return (
     <div className='player_form_container'>
       <form className='player_form'>
@@ -57,6 +63,7 @@ console.log(playerLists)
         </label>
         <button type='submit'>Submit Player</button>
       </form>
+      <div>{message ? message : 'Loading...'}</div>
     </div>
   )
 }
