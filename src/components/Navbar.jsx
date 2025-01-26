@@ -27,26 +27,29 @@ function Navbar() {
         className={({ isActive }) => (isActive ? "active_link" : "")}
         >HOME
         </NavLink></li>
-        <li><NavLink to='/playerslists' onClick={closeDropdown}
+        <li><NavLink to='/playersLists' onClick={closeDropdown}
         className={({ isActive }) => (isActive ? "active_link" : "")}>PLAYERS
         </NavLink></li>
-        <li>
-          <NavLink to='#' onClick={handleForm}
-          className={({ isActive }) => (isActive ? "active_link" : "")}>FORMS</NavLink>
-          {showForm && (
-            <ul className={showForm ? 'dropdown-visible' : 'dropdown-hidden'}>
-              <li><NavLink to='/playerForm' onClick={closeDropdown}
-              className={({ isActive }) => (isActive ? "active_link" : "")}>PLAYER FORM
-              </NavLink></li>
-              <li><NavLink to='/statForm' onClick={closeDropdown}
-              className={({ isActive }) => (isActive ? "active_link" : "")}>STAT FORM
-              </NavLink></li>
-              <li><NavLink to='/teamForm' onClick={closeDropdown}
-              className={({ isActive }) => (isActive ? "active_link" : "")}>TEAM FORM
-              </NavLink></li>
-            </ul>
-          )}
-        </li>
+        <li><NavLink to='/teamsLists' onClick={closeDropdown}
+        className={({ isActive }) => (isActive ? "active_link" : "")}>TEAMS
+        </NavLink></li>
+<li>
+  <NavLink 
+    to="/forms" 
+    onClick={handleForm}
+    className={({ isActive }) => (showForm || isActive ? "active_link" : "")}
+  >
+    FORMS
+  </NavLink>
+  {showForm && (
+    <ul className={showForm ? 'dropdown-visible' : 'dropdown-hidden'}>
+      <li><NavLink to='/playerForm' onClick={closeDropdown} className={({ isActive }) => (isActive ? "active_link" : "")}>PLAYER FORM</NavLink></li>
+      <li><NavLink to='/statForm' onClick={closeDropdown} className={({ isActive }) => (isActive ? "active_link" : "")}>STAT FORM</NavLink></li>
+      <li><NavLink to='/teamForm' onClick={closeDropdown} className={({ isActive }) => (isActive ? "active_link" : "")}>TEAM FORM</NavLink></li>
+    </ul>
+  )}
+</li>
+
       </ul>
 
       {/* Hamburger Icon */}

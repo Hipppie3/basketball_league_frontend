@@ -13,7 +13,6 @@ const handlePlayerChange = (e) => {
     ...prev,
     [name]: value,
   }));
-
 };
 
 const handlePlayerSubmit = async (e) => {
@@ -45,11 +44,9 @@ const handlePlayerSubmit = async (e) => {
       position: "",
       number: ""
     });
-
   } catch (error) {
     console.error('Error submitting player:', error);
     setMessage('Failed to create player. Please try again.');
-
     setTimeout(() => {
       setMessage('');
       setMessageType('');
@@ -60,7 +57,7 @@ const handlePlayerSubmit = async (e) => {
   return (
     <div className='player_form_container'>
       <div className={`message ${messageType === 'success' ? 'success-message' : ''} ${messageType === 'error' ? 'error-message' : ''}`}>
-        {message }
+        {message}
       </div>
       <form className='player_form' onSubmit={handlePlayerSubmit}>
         <label>First Name
@@ -103,7 +100,7 @@ const handlePlayerSubmit = async (e) => {
           onChange={handlePlayerChange}
           />
         </label>
-        <button type='submit'>Submit Player</button>
+        <button type='submit'>Create Player</button>
       </form>
     </div>
   )
