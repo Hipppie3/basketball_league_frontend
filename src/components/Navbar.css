@@ -1,44 +1,75 @@
-.navbar_container{
+/* Navbar container */
+.navbar_container {
+ position: sticky;
+ top: 0;
  width: 100%;
- height: 60px;
+ height: 80px;
+ z-index: 1000;
  background-color: orange;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 0 20px;
 }
 
-.navbar_container ul {
+/* Active link styling */
+.active_link {
+ font-weight: bold;
+ /* Bold text for active link */
+ color: white;
+ /* Change color when active */
+ /* Optional background color */
+ border-radius: 5px;
+ /* Add rounded corners */
+ padding: 5px 10px;
+ /* Add some padding */
+}
+
+/* Default navigation links (desktop) */
+.nav_links {
  display: flex;
- flex-direction: row;
  justify-content: space-evenly;
  align-items: center;
  width: 100%;
  height: 100%;
  list-style: none;
+ gap: 20px;
 }
 
-.navbar_container ul ul {
- position: absolute;
- right: -8px;
- top: 175%;
- display: flex;
- flex-direction: column;
- width: 240px;
- height: 200px
-}
-
-.navbar_container ul li {
+/* Nav links styling */
+.nav_links li {
  position: relative;
 }
 
-.navbar_container ul a {
+.nav_links a {
  text-decoration: none;
  font-size: 20px;
  color: black;
  width: 148px;
- display: inline-block
+ display: inline-block;
 }
 
-.navbar_container ul a:hover {
+.nav_links a:hover {
  font-weight: bold;
 }
+
+/* Dropdown menu inside Forms */
+.nav_links ul {
+ position: absolute;
+ right: -8px;
+ /* Align dropdown to the right of the parent */
+ top: 170%;
+ /* Position it below the "FORMS" link */
+ display: flex;
+ flex-direction: column;
+ width: 240px;
+ background: orange;
+ padding: 10px 0;
+
+ list-style: none;
+}
+
+/* Dropdown visibility */
 .dropdown-hidden {
  display: none;
 }
@@ -47,16 +78,82 @@
  display: block;
  position: absolute;
  background: orange;
- border-left: 1px solid black;
- border-right: 1px solid black;
- border-bottom: 1px solid black;
  width: 150px;
  height: auto;
  max-height: 200px;
  padding: 10px 0;
+ box-shadow: 0 2px 5px orange;
 }
 
 .dropdown-visible li {
  padding: 10px;
  text-align: center;
+}
+
+/* Hamburger Icon */
+.hamburger {
+ display: none;
+ font-size: 30px;
+ cursor: pointer;
+ margin-left: auto;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+ .hamburger {
+  display: block;
+  /* Show hamburger menu on mobile */
+ }
+
+ .nav_links {
+  display: none;
+  /* Hide nav links initially */
+  position: absolute;
+  top: 80px;
+  left:0;
+  /* Move dropdown slightly from right */
+  background-color: orange;
+  width: 100%;
+  /* Reduce width of mobile menu */
+  height: auto;
+  /* Allow it to grow based on content */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 0;
+  /* Add rounded corners for better appearance */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 0;
+ }
+
+ .show_mobile {
+  display: flex;
+  /* Show when hamburger is clicked */
+ }
+
+ .nav_links li {
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  margin: 0;
+ }
+      .nav_links ul {
+       position: static;
+       /* Remove absolute positioning */
+       width: 100%;
+       /* Full width to align below "FORMS" */
+       background: orange;
+       text-align: center;
+       padding: 10px 0;
+       box-shadow: none;
+       /* Remove desktop box-shadow */
+      }
+   
+      .dropdown-visible {
+       display: block;
+      }
+   
+      .dropdown-hidden {
+       display: none;
+      }
 }

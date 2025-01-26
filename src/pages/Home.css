@@ -1,0 +1,62 @@
+.home_container {
+ width: 100%;
+ height: calc(100vh - 80px);
+ /* Fit remaining screen height */
+ padding: 0;
+ background-color: #f0f0f0;
+ text-align: center;
+ overflow-y: auto;
+ /* Enable internal scrolling */
+ scroll-snap-type: y mandatory;
+ scroll-behavior: smooth;
+ scroll-padding-top: 1px;
+ /* Ensures smoother snapping */
+ scrollbar-width: none;
+ /* Hide scrollbar for a cleaner effect (optional) */
+}
+
+/* Section styling */
+section {
+ padding: 100px 20px;
+ height: 100vh;
+ /* Each section takes full viewport height */
+ border-bottom: 1px solid #ccc;
+ scroll-snap-align: start;
+ /* Ensures the section starts at the top */
+ transition: transform 0.8s ease-in-out;
+ /* Slow down appearance */
+}
+
+/* Optional: Hide scrollbar for a cleaner look in Webkit-based browsers */
+.home_container::-webkit-scrollbar {
+ display: none;
+}
+/* Individual section styles */
+.hero_section {
+ background-color: #ff5733;
+ color: white;
+}
+
+.about_section {
+ background-color: #2e86de;
+ color: white;
+}
+
+.players_section {
+ background-color: #28b463;
+ color: white;
+}
+
+.contact_section {
+ background-color: #f4d03f;
+ color: black;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+ section {
+  padding: 50px 15px;
+  height: 80vh;
+  /* Reduce height slightly for smaller screens */
+ }
+}
