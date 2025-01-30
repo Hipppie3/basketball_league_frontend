@@ -1,26 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import React from 'react'
+import { useTeams } from '../context/TeamsContext.jsx'
 
-const TeamsLists = () => {
-  const [teams, setTeams] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-    try{
-      const response = await axios.get('http://localhost:5050/api/teams')
-      console.log(response.data)
-      setTeams(response.data)
-    } catch (error) {
-      console.error('Error fetching teams:', error)
-    } 
-  }
-    fetchData();
-  },[])
-
-
+function TeamsLists() {
+  const { teams } = useTeams(); // Get teams from context
+  console.log(teams)
   return (
     <div>
-      <h2>Teams</h2>
       {teams.map((team) => (
         <div key={team.id}>
           <h3>{team.name}</h3>

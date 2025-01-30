@@ -1,32 +1,21 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import React from 'react';
+import { usePlayers } from '../context/PlayersContext.jsx';
+import './PlayersLists.css';
 
 function PlayersLists() {
-  const [players, setPlayers] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5050/api/players')
-        console.log(response.data)
-        setPlayers(response.data)
-      } catch (error) {
-        console.error('Error fetching players:', error)
-      }
-    }
-    fetchData();
-  },[])
-
+  const { players } = usePlayers(); // Get players from context
 
   return (
-    <div>
+    <div className="players_list_container">
       {players.map((player) => (
-        <div key={player.id}>
-          <h3>{player.firstName}</h3>
+        <div key={player.id} className="player_card">
+          <h3>{player.firstName} {player.lastName}</h3>
+          <p>Position: {player.position}</p>
+          <p>Age: {player.age}</p>
         </div>
       ))}
     </div>
-  )
+  );
 }
 
-export default PlayersLists
+export default PlayersLists;

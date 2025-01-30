@@ -1,8 +1,7 @@
 .player_form_container {
  display: flex;
- justify-content: center;
  align-items: center;
- height: calc(100vh - 60px);
+ min-height: 100vh;
  background-color: #1a202c;
  color: white;
  flex-direction: column;
@@ -23,7 +22,9 @@
  margin-bottom: 0.5rem;
 }
 
-.player_form input {
+.player_form input,
+.player_form select {
+ /* Apply same styling to inputs and select */
  width: 100%;
  padding: 10px;
  border-radius: 5px;
@@ -32,6 +33,19 @@
  border: none;
  outline: none;
  margin-bottom: 1rem;
+}
+
+/* Fix select dropdown arrow */
+.player_form select {
+ appearance: none;
+ -webkit-appearance: none;
+ -moz-appearance: none;
+ cursor: pointer;
+}
+
+/* Add some padding to select when needed */
+.player_form select:focus {
+ outline: 2px solid #3182ce;
 }
 
 .player_form button {
@@ -45,6 +59,21 @@
  cursor: pointer;
 }
 
+.view_player_btn {
+  width: 30%;
+  padding: 10px;
+  border: none;
+  background-color: #3182ce;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+.view_player_btn:hover {
+ background-color: #2b6cb0;
+}
 .player_form button:hover {
  background-color: #2b6cb0;
 }
@@ -70,15 +99,90 @@
  border: 1px solid #f5c6cb;
 }
 
+/* Players table container */
+.players_table_container {
+ width: 100%;
+ max-width: 800px;
+ margin-top: 2rem;
+ overflow-x: auto;
+ /* Allows scrolling if table is too wide */
+}
+
+/* Table styling */
+.players_table {
+ width: 100%;
+ border-collapse: collapse;
+ background-color: #2d3748;
+ color: white;
+ text-align: left;
+ border-radius: 10px;
+ overflow: hidden;
+}
+
+/* Table header */
+.players_table th {
+ background-color: #3182ce;
+ padding: 12px;
+ color: white;
+ text-transform: uppercase;
+}
+
+/* Table body rows */
+.players_table td {
+ padding: 10px;
+ border-bottom: 1px solid #4a5568;
+}
+
+/* Table row hover effect */
+.players_table tr:hover {
+ background-color: #3b475a;
+}
+
+/* Edit and Delete button styling */
+.edit_btn,
+.delete_btn {
+ padding: 6px 12px;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+ font-weight: bold;
+ margin-right: 5px;
+}
+
+.edit_btn {
+ background-color: #f6e05e;
+ color: #1a202c;
+}
+
+.delete_btn {
+ background-color: #e53e3e;
+ color: white;
+}
+
+.edit_btn:hover {
+ background-color: #d69e2e;
+}
+
+.delete_btn:hover {
+ background-color: #c53030;
+}
+
 /* Responsive layout for smaller screens */
 @media (max-width: 768px) {
  .player_form_container {
   height: calc(100vh - 60px);
-  /* Remove fixed height for better flexibility */
   justify-content: flex-start;
   padding-top: 4rem;
-  /* Increase top padding to move form closer to navbar */
   padding-bottom: 2rem;
-  /* Add some space at the bottom */
  }
+ .players_table_container {
+  overflow-x: scroll;
+ }
+   
+ .players_table th,
+ .players_table td {
+  padding: 8px;
+  font-size: 14px;
+ }
+      
 }

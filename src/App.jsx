@@ -8,9 +8,11 @@ import TeamsLists from './pages/TeamsLists.jsx'
 import PlayerForm from './forms/PlayerForm.jsx'
 import StatForm from './forms/StatForm.jsx'
 import TeamForm from './forms/TeamForm.jsx'
+import AppProviders from './context/AppProviders.jsx'
 
 function App() {
   return (
+    <AppProviders>
     <div className='app_container'>
       <Navbar />
       <Routes>
@@ -22,6 +24,7 @@ function App() {
         <Route path='teamForm' element={<TeamForm />} />
       </Routes>
     </div>
+    </AppProviders>
   )
 }
 
