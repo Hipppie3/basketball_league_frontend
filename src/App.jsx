@@ -9,6 +9,8 @@ import PlayerForm from './forms/PlayerForm.jsx'
 import StatForm from './forms/StatForm.jsx'
 import TeamForm from './forms/TeamForm.jsx'
 import AppProviders from './context/AppProviders.jsx'
+import TeamDetails from './details/TeamDetails';
+import PlayerDetails from './details/PlayerDetails.jsx'
 
 function App() {
   return (
@@ -19,9 +21,11 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/playersLists' element={<PlayersLists />} />
         <Route path='/teamsLists' element={<TeamsLists />} />
+        <Route path='/teams/:id' element={<TeamDetails />} /> 
+        <Route path='/players/:id' element={<PlayerDetails />} />
         <Route path='/playerForm' element={<PlayerForm />} />
         <Route path='/statForm' element={<StatForm />} />
-        <Route path='teamForm' element={<TeamForm />} />
+        <Route path='/teamForm' element={<TeamForm />} />
       </Routes>
     </div>
     </AppProviders>

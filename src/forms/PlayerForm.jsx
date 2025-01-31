@@ -13,7 +13,7 @@ function PlayerForm() {
     age: "",
     position: "",
     number: "",
-    teamId: "",
+    team_id: "",
   });
 
   const [message, setMessage] = useState('');
@@ -26,7 +26,7 @@ function PlayerForm() {
     const { name, value } = e.target;
     setPlayerFormData((prev) => ({
       ...prev,
-      [name]: name === 'teamId' ? Number(value) || "" : value,
+      [name]: name === 'team_id' ? Number(value) || "" : value,
     }));
   };
 
@@ -39,7 +39,7 @@ function PlayerForm() {
       age: player.age || "",
       position: player.position,
       number: player.number || "",
-      teamId: player.teamId || "",
+      team_id: player.team_id || "",
     });
     setSelectedPlayerId(player.id);
     setIsEditing(true);
@@ -51,7 +51,7 @@ function PlayerForm() {
       ...playerFormData,
       age: playerFormData.age === '' ? null : Number(playerFormData.age),
       number: playerFormData.number === '' ? null : Number(playerFormData.number),
-      teamId: playerFormData.teamId === '' ? null : Number(playerFormData.teamId),
+      team_id: playerFormData.team_id === '' ? null : Number(playerFormData.team_id),
     };
 
     try {
@@ -75,7 +75,7 @@ function PlayerForm() {
         age: "",
         position: "",
         number: "",
-        teamId: "",
+        team_id: "",
       });
 
       setIsEditing(false);
@@ -146,8 +146,8 @@ function PlayerForm() {
 
         <label>Team  
           <select 
-            name='teamId'
-            value={playerFormData.teamId}
+            name='team_id'
+            value={playerFormData.team_id}
             onChange={handlePlayerChange}
           >
             <option value=''>Select a Team</option>

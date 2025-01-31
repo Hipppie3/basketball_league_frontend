@@ -1,52 +1,61 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useTeams } from '../context/TeamsContext'; // Import TeamsContext
-import './TeamForm.css'
+import { useTeams } from '../context/TeamsContext';
+import './TeamForm.css';
 
 function TeamForm() {
-  const { teams, setTeams } = useTeams(); // Get teams and setTeams from context
+  const { teams, addTeam, editTeam, deleteTeam } = useTeams();
   const [teamFormData, setTeamFormData] = useState({ name: '' });
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [showTeams, setShowTeams] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedTeamId, setSelectedTeamId] = useState(null);
 
   const toggleTeams = () => setShowTeams((prev) => !prev);
 
   const handleTeamChange = (e) => {
-    const { name, value } = e.target;
-    setTeamFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setTeamFormData({ name: e.target.value });
   };
 
   const handleTeamSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5050/api/teams', teamFormData);
-      
-      // Update TeamsContext state directly
-      setTeams((prevTeams) => [...prevTeams, response.data]);
+      if (isEditing) {
+        await editTeam(selectedTeamId, teamFormData);
+        setMessage(`Team updated successfully: ${teamFormData.name}`);
+      } else {
+        await addTeam(teamFormData);
+        setMessage(`Team created successfully: ${teamFormData.name}`);
+      }
 
-      setMessage(`Team created successfully: ${teamFormData.name}`);
       setMessageType('success');
-
-      setTimeout(() => {
-        setMessage('');
-        setMessageType('');
-      }, 3000);
-
-      setTeamFormData({ name: "" });
+      resetForm();
     } catch (error) {
-      console.error('Error submitting team:', error);
-      setMessage('Failed to create team. Please try again.');
+      setMessage('Failed to process request. Please try again.');
       setMessageType('error');
-
-      setTimeout(() => {
-        setMessage('');
-        setMessageType('');
-      }, 3000);
     }
+  };
+
+  const handleEditClick = (team) => {
+    setTeamFormData({ name: team.name });
+    setSelectedTeamId(team.id);
+    setIsEditing(true);
+  };
+
+  const handleDeleteClick = async (id) => {
+    await deleteTeam(id);
+    setMessage('Team deleted successfully');
+    setMessageType('success');
+  };
+
+  const resetForm = () => {
+    setTeamFormData({ name: '' });
+    setIsEditing(false);
+    setSelectedTeamId(null);
+    setTimeout(() => {
+      setMessage('');
+      setMessageType('');
+    }, 3000);
   };
 
   return (
@@ -58,7 +67,7 @@ function TeamForm() {
       )}
 
       <form onSubmit={handleTeamSubmit}>
-        <label>Team Name 
+        <label>Team Name
           <input 
             type='text'
             name='name'
@@ -66,21 +75,36 @@ function TeamForm() {
             onChange={handleTeamChange}
           />
         </label>
-        <button type='submit'>Create Team</button>
+        <button type='submit'>{isEditing ? 'Update Team' : 'Create Team'}</button>
       </form>
-      <div>
-        <button onClick={toggleTeams}>
-          {showTeams ? "Hide Teams" : "View Teams"}
-        </button>
-      </div>
 
-      <div>
-        {showTeams && teams.length > 0 && teams.map((team) => (
-          <div key={team.id}>
-          {team.name}
-          </div>
-        ))}
-      </div>
+      <button onClick={toggleTeams}>
+        {showTeams ? "Hide Teams" : "View Teams"}
+      </button>
+
+      {showTeams && teams.length > 0 && (
+        <div className="teams_table_container">
+          <table className="teams_table">
+            <thead>
+              <tr>
+                <th>Team Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {teams.map((team) => (
+                <tr key={team.id}>
+                  <td>{team.name}</td>
+                  <td>
+                    <button className="edit_btn" onClick={() => handleEditClick(team)}>Edit</button>
+                    <button className="delete_btn" onClick={() => handleDeleteClick(team.id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

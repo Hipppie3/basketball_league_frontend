@@ -1,18 +1,25 @@
-import React from 'react'
-import { useTeams } from '../context/TeamsContext.jsx'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { useTeams } from '../context/TeamsContext';
 
-function TeamsLists() {
-  const { teams } = useTeams(); // Get teams from context
-  console.log(teams)
+function TeamsList() {
+  const { teams } = useTeams(); // ✅ Get teams from context
+
+  if (!teams.length) return <p>Loading teams...</p>;
+
   return (
     <div>
-      {teams.map((team) => (
-        <div key={team.id}>
-          <h3>{team.name}</h3>
-        </div>
-      ))}
+      <h2>Teams</h2>
+      <ul>
+        {teams.map((team) => (
+          <li key={team.id}>
+            {/* ✅ Clickable Link to Team Details */}
+            <NavLink to={`/teams/${team.id}`}>{team.name}</NavLink>
+          </li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
 
-export default TeamsLists
+export default TeamsList;

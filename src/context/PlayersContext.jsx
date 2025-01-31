@@ -36,6 +36,18 @@ export const PlayersProvider = ({ children }) => {
     }
   };
 
+  // ✅ Fetch (GET) Player by ID
+
+  const getPlayerById = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:5050/api/players/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetch player by ID:', error);
+      return null;
+    }
+  }
+
   // ✅ Edit (PUT) Player
   const editPlayer = async (id, updatedData) => {
     try {
@@ -43,7 +55,7 @@ export const PlayersProvider = ({ children }) => {
       setPlayers((prevPlayers) =>
         prevPlayers.map((player) => (player.id === id ? response.data : player))
       );
-    } catch (error) {
+    } catch (error) { 
       console.error('Error updating player:', error);
     }
   };
@@ -59,7 +71,7 @@ export const PlayersProvider = ({ children }) => {
   };
 
   return (
-    <PlayersContext.Provider value={{ players, addPlayer, editPlayer, deletePlayer }}>
+    <PlayersContext.Provider value={{ players, addPlayer, editPlayer, deletePlayer, getPlayerById }}>
       {children}
     </PlayersContext.Provider>
   );
