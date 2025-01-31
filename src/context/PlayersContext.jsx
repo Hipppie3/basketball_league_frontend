@@ -13,7 +13,7 @@ export const usePlayers = () => {
 export const PlayersProvider = ({ children }) => {
   const [players, setPlayers] = useState([]);
 
-  // ✅ Fetch players from API on mount
+  // Fetch players from API on mount
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
@@ -26,7 +26,7 @@ export const PlayersProvider = ({ children }) => {
     fetchPlayers();
   }, []);
 
-  // ✅ Create (POST) Player
+  // Create (POST) Player
   const addPlayer = async (playerData) => {
     try {
       const response = await axios.post('http://localhost:5050/api/players', playerData);
@@ -36,7 +36,7 @@ export const PlayersProvider = ({ children }) => {
     }
   };
 
-  // ✅ Fetch (GET) Player by ID
+  // Fetch (GET) Player by ID
 
   const getPlayerById = async (id) => {
     try {
@@ -46,9 +46,9 @@ export const PlayersProvider = ({ children }) => {
       console.error('Error fetch player by ID:', error);
       return null;
     }
-  }
+  };
 
-  // ✅ Edit (PUT) Player
+  // Edit (PUT) Player
   const editPlayer = async (id, updatedData) => {
     try {
       const response = await axios.put(`http://localhost:5050/api/players/${id}`, updatedData);
@@ -60,7 +60,7 @@ export const PlayersProvider = ({ children }) => {
     }
   };
 
-  // ✅ Delete (DELETE) Player
+  // Delete (DELETE) Player
   const deletePlayer = async (id) => {
     try {
       await axios.delete(`http://localhost:5050/api/players/${id}`);
